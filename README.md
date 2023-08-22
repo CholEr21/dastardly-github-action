@@ -35,7 +35,7 @@ steps:
   - name: Run Dastardly Action Step
     uses: PortSwigger/dastardly-github-action@main
     with:
-      target-url: 'https://ginandjuice.shop'
+      target-url: '10.247.251.110/LegalMVCJava/'
 ```
 
 ## Suggested Usage
