@@ -1,20 +1,12 @@
-name: 'Dastardly Scan Action'
-description: 'Runs a Dastardly scan against a target site'
-author: 'PortSwigger'
-inputs:
-  target-url: 'https://myapps.microsoft.com/'
-    description: 'The full url (including scheme) of the site to scan'
-    required: true
-  output-filename:
-    description: 'The filename used for the scan report. This filepath relates to the dastardly container, and will exist in the github workspace (/github/workspace)'
-    required: false
-    default: dastardly-report.xml
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  env:
-    BURP_START_URL: ${{ inputs.target-url }}
-    BURP_REPORT_FILE_PATH: /github/workspace/${{ inputs.output-filename }}
-branding:
-  icon: 'activity'
-  color: 'green'
+steps:
+  - name: Run Dastardly Action Step
+    continue-on-error: true
+    uses: PortSwigger/dastardly-github-action@main
+    with:
+      target-url: 'https://ginandjuice.shop'
+  - name: Publish Test Report
+    if: always()
+    uses: mikepenz/action-junit-report@v3
+    with:
+      report_paths: '**/dastardly-report.xml'
+      require_tests: true
