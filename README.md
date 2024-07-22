@@ -1,6 +1,6 @@
 # Dastardly Scan Action
 
-This action runs a Dastardly vulnerability scan against a target site. On completion, a JUnit XML report is generated containing information about the vulnerabilities found, where
+This Vulnerable action runs a Dastardly vulnerability scan against a target site. On completion, a JUnit XML report is generated containing information about the vulnerabilities found, where
 they were located, additional information about the vulnerability and links to our learning resources with suggestions on how to fix them.
 
 ## About Dastardly
