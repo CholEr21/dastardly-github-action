@@ -1,0 +1,27 @@
+name: Dastardly Scan
+
+on: [push, pull_request]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Dastardly Action Step
+        uses: PortSwigger/dastardly-github-action@main
+        with:
+          target-url: 'https://hgsconnect.teamhgs.com/usaexceptionvapt'
+          auth-username: ${{ secrets.TARGET_USERNAME }}
+
+      - name: Verify Dastardly Report
+        run: |
+          ls -la
+          cat dastardly-report.xml
+
+      - name: Upload Dastardly Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: dastardly-report
+          path: dastardly-report.xml
